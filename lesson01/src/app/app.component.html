@@ -1,0 +1,93 @@
+
+<p-table
+#dt2
+[value]="jsonProducts"
+[tableStyle]="{ 'min-width': '50rem' }"
+[rows]="5"
+[rowsPerPageOptions]="[5,10,20]"
+[showCurrentPageReport]="true"
+[paginator]="true"
+paginatorPosition="bottom"
+currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+[globalFilterFields]="['title','description', 'price']"
+
+>
+
+<ng-template pTemplate="caption">
+  <div class="flex">
+      <button pButton label="Clear" class="p-button-sm p-button-outlined" icon="pi pi-filter-slash" (click)="clear(dt2)"></button>
+      <span class="p-input-icon-left ml-auto">
+          <i class="pi pi-search"></i>
+          <input pInputText class="p-inputtext-sm" type="text" (input)="dt2.filterGlobal($any($event.target).value, 'contains')" placeholder="Search keyword" />
+      </span>
+  </div>
+</ng-template>
+
+  <ng-template pTemplate="header">
+      <tr>
+
+          <th>Title</th>
+          <th>Description</th>
+          <th>Price</th>
+      </tr>
+
+      <tr>
+        <th>
+            <p-columnFilter type="text" field="title" matchMode="contains"></p-columnFilter>
+        </th>
+        <th>
+          <p-columnFilter type="text" field="description"  matchMode="contains"></p-columnFilter>
+      </th>
+      <th>
+        <p-columnFilter type="text" field="price" matchMode="contains"></p-columnFilter>
+    </th>
+
+  </ng-template>
+  <ng-template pTemplate="body" let-product>
+      <tr>
+          <td><img src="{{product.image }}" width="30" height="30" class="border border-secondary rounded-circle">{{ product.title }}</td>
+          <td>{{ product.description }}</td>
+          <td>{{ product.price }}</td>
+      </tr>
+  </ng-template>
+
+</p-table>
+
+<hr>
+<h1>Using Table</h1>
+<button type="button" class="btn btn-primary" (click)="exportExcel()">Excel</button>
+
+<div class="table-responsive">
+  <table class="table table-hover table-sm table-bordered" id="table-data">
+    <caption class="caption-top">This is top caption</caption>
+    <thead class="table-light">
+    <tr>
+        <th>Code</th>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Qauntity</th>
+
+    </tr>
+  </thead>
+  <tbody class="table-group-divider">
+      <tr *ngFor="let product of products" [ngClass]="{ 'odd-row': alterRow() }">
+        <td>{{ product.code }}</td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.category }}</td>
+        <td>{{ product.quantity }}</td>
+    </tr>
+  </tbody>
+
+  </table>
+</div>
+
+<hr>
+<h1>Two-way binding</h1>
+<p><input pInputText type="text" class="p-inputtext-sm" [(ngModel)]="searchValue" /></p>
+<p><input pInputText type="text"  [(ngModel)]="searchValue" /></p>
+
+<p>
+  You're searching for: {{searchValue}}
+</p>
+
+<button class="btn btn-primary"><i class="fa-solid fa-check"></i> Check</button>
