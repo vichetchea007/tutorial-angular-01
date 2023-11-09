@@ -46,7 +46,7 @@ import { ToastModule } from 'primeng/toast';
 })
 export class AppComponent implements OnInit {
 
-  matchModeOptions: SelectItem[] | undefined;
+  matchModeOptions: SelectItem[] | any;
 
 
   ngOnInit() {

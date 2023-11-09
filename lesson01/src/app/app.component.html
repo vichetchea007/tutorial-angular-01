@@ -36,7 +36,7 @@ currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
             <p-columnFilter type="text" field="title" matchMode="contains"></p-columnFilter>
         </th>
         <th>
-          <p-columnFilter type="text" field="description"  matchMode="contains"></p-columnFilter>
+          <p-columnFilter type="text" field="description" [matchModeOptions]="matchModeOptions" matchMode="contains"></p-columnFilter>
       </th>
       <th>
         <p-columnFilter type="text" field="price" matchMode="contains"></p-columnFilter>
